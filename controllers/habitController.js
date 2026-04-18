@@ -1,5 +1,5 @@
 import Joi from "joi"
-import { manageEventService, getEventsService, deleteEventService } from "../services/habitService.js"
+import { manageEventService, getEventsService, deleteEventService } from "../services/eventService.js"
 
 const manageEventController = async (req, res) => {
 

@@ -1,4 +1,4 @@
-import { manageHabit, myEvents, deleteEvent } from "../repositories/habitRepository.js"
+import { manageHabit, myEvents, deleteEvent } from "../repositories/eventRepository.js"
 
 const manageEventService = async (id, value) => {
     try {
