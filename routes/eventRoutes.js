@@ -1,7 +1,7 @@
 
 
 import express from "express";
-import { manageEventController, deleteEventController, getEventsController } from "../controllers/habitController.js";
+import { manageEventController, deleteEventController, getEventsController } from "../controllers/eventController.js";
 
 const router = express.Router()
 
