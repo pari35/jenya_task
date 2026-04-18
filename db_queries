@@ -1,0 +1,34 @@
+CREATE TABLE IF NOT EXISTS public.users
+(
+    user_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    emailid VARCHAR(150) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+)
+
+CREATE TABLE IF NOT EXISTS public.habits (
+    habit_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_habits_user
+        FOREIGN KEY (user_id) REFERENCES public.users(user_id)
+        ON DELETE CASCADE
+)
+
+CREATE TABLE IF NOT EXISTS public.habit_completions (
+    completion_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    habit_id INT NOT NULL,
+    completion_date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_completion_habit
+        FOREIGN KEY (habit_id) REFERENCES public.habits(habit_id)
+        ON DELETE CASCADE,
+
+    -- Avoid multiple entries for same day
+    CONSTRAINT unique_habit_day UNIQUE (habit_id, completion_date)
+)
